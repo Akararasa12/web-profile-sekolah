@@ -123,10 +123,14 @@ const AdminLayout = ({ children }) => {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed left-0 top-0 bottom-0 w-80 bg-white z-[101] flex flex-col shadow-2xl lg:hidden"
             >
-              <div className="absolute top-6 right-6">
+              <div className="absolute top-5 right-5 z-50">
                 <button 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 bg-slate-50 rounded-xl text-slate-400 hover:text-slate-900 transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="p-3 bg-slate-100 text-slate-600 rounded-2xl hover:bg-slate-200 hover:text-slate-900 transition-all active:scale-95"
+                  aria-label="Close menu"
                 >
                   <X className="w-6 h-6" />
                 </button>

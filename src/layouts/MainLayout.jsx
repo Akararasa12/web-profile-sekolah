@@ -32,9 +32,9 @@ const MainLayout = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-white-600 rounded-xl flex items-center justify-center text-white shadow-lg overflow-hidden">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 shadow-lg overflow-hidden border border-slate-100">
                   {settings.logoUrl ? (
-                    <img src={settings.logoUrl} alt="Logo" className="w-full h-full object-contain p-1" />
+                    <img src={settings.logoUrl} alt="Logo" className="w-full h-full object-cover" />
                   ) : (
                     <School className="w-6 h-6" />
                   )}
