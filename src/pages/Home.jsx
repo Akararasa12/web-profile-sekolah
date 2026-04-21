@@ -57,11 +57,11 @@ const Home = () => {
 
           <h1 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter text-white leading-[1.1]">
             SMK Islam Terpadu <br />
-            <span className="text-primary-500">Iqro</span>
+            <span className="text-primary-500">Iqro Leles</span>
           </h1>
           
           <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-medium">
-            Mencetak Generasi Unggul dalam Imtak dan Iptek, Berkarakter Islami, dan Siap Bersaing di Dunia Global.
+            Mencetak Peserta Didik yang Mandiri, Terampil, Disiplin, Berprestasi, Sehat, dan Berakhlakul Karimah.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5">

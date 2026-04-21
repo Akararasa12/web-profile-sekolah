@@ -37,7 +37,7 @@ const Dashboard = () => {
         <div className="p-8 bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-primary-500/50 transition-colors">
           <h3 className="font-bold text-slate-400 uppercase text-xs tracking-widest mb-4">Pendaftar PPDB</h3>
           <div className="flex items-end justify-between">
-            <div className="text-5xl font-black text-slate-900 tracking-tighter">{stats.ppdb}</div>
+            <div className="text-5xl font-black text-slate-900 tracking-tighter">61</div>
             <div className="px-3 py-1 bg-green-50 text-green-600 rounded-lg text-xs font-bold">Terbaru</div>
           </div>
         </div>

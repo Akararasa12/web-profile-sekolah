@@ -11,8 +11,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [logo, setLogo] = useState('')
-  const [schoolName, setSchoolName] = useState('SMK IT IQRO')
-  const [tagline, setTagline] = useState('Imtak & Iptek')
+  const [schoolName, setSchoolName] = useState('SMK IT IQRO LELES')
+  const [tagline, setTagline] = useState('Mandiri & Berakhlakul Karimah')
   const location = useLocation()
 
   useEffect(() => {
