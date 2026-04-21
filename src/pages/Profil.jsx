@@ -35,13 +35,13 @@ const Profil = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-10 bg-white border border-slate-100 rounded-[3rem] shadow-xl shadow-slate-200/50"
+            className="p-10 bg-white border border-slate-100 rounded-[3rem] shadow-xl shadow-slate-200/50 flex flex-col items-center text-center"
           >
-            <div className="w-16 h-16 bg-secondary-50 rounded-2xl flex items-center justify-center mb-8">
-              <Eye className="w-8 h-8 text-secondary-600" />
+            <div className="w-20 h-20 bg-secondary-50 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
+              <Eye className="w-10 h-10 text-secondary-600" />
             </div>
-            <h2 className="text-3xl font-bold mb-6 text-slate-900">Visi Kami</h2>
-            <p className="text-xl text-slate-600 leading-relaxed font-medium">
+            <h2 className="text-3xl font-black mb-6 text-slate-900 tracking-tight">Visi Kami</h2>
+            <p className="text-xl text-slate-600 leading-relaxed font-semibold italic">
               "Menjadi lembaga pendidikan kejuruan Islam terpadu yang unggul, menghasilkan lulusan berakhlak mulia, kompeten secara profesional, dan inovatif di era digital."
             </p>
           </motion.div>
@@ -51,13 +51,13 @@ const Profil = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-10 bg-white border border-slate-100 rounded-[3rem] shadow-xl shadow-slate-200/50"
+            className="p-10 bg-white border border-slate-100 rounded-[3rem] shadow-xl shadow-slate-200/50 flex flex-col items-center text-center"
           >
-            <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-8">
-              <Target className="w-8 h-8 text-primary-600" />
+            <div className="w-20 h-20 bg-primary-50 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
+              <Target className="w-10 h-10 text-primary-600" />
             </div>
-            <h2 className="text-3xl font-bold mb-6 text-slate-900">Misi Kami</h2>
-            <div className="space-y-4">
+            <h2 className="text-3xl font-black mb-6 text-slate-900 tracking-tight">Misi Kami</h2>
+            <div className="space-y-4 text-left w-full max-w-md mx-auto">
               {missions.map((mission, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="flex-shrink-0 mt-1">

@@ -32,7 +32,7 @@ const MainLayout = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white shadow-lg overflow-hidden">
+                <div className="w-12 h-12 bg-white-600 rounded-xl flex items-center justify-center text-white shadow-lg overflow-hidden">
                   {settings.logoUrl ? (
                     <img src={settings.logoUrl} alt="Logo" className="w-full h-full object-contain p-1" />
                   ) : (
@@ -72,7 +72,7 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
           <div className="mt-16 pt-8 border-t border-slate-200 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
-            © {new Date().getFullYear()} {settings.schoolName}. All rights reserved.
+            © {new Date().getFullYear()} {settings.schoolName}. All rights reserved. Created by Alif Nugraha-<span className="text-amber-500">KALAMUNA INNOVATIVE MEDIA</span>
           </div>
         </div>
       </footer>

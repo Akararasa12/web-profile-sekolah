@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary-600/30 transition-all overflow-hidden">
+          <div className="w-12 h-12 bg-white-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary-600/30 transition-all overflow-hidden">
             {logo ? (
               <img src={logo} alt="Logo" className="w-full h-full object-contain p-1" />
             ) : (
@@ -65,14 +65,13 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link 
-              key={link.path} 
-              to={link.path} 
-              className={`text-sm font-bold uppercase tracking-wider transition-all ${
-                location.pathname === link.path 
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`text-sm font-bold uppercase tracking-wider transition-all ${location.pathname === link.path
                   ? 'text-primary-600 border-b-2 border-primary-600'
                   : 'text-slate-600 hover:text-primary-600'
-              }`}
+                }`}
             >
               {link.name}
             </Link>
@@ -86,7 +85,12 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-slate-900" onClick={() => setIsOpen(!isOpen)}>
+        <button 
+          className="md:hidden text-slate-900 p-2 hover:bg-slate-100 rounded-lg transition-colors" 
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Tutup Menu" : "Buka Menu"}
+          aria-expanded={isOpen}
+        >
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>

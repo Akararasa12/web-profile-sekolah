@@ -29,19 +29,21 @@ body {
   width: 100%;
 }
 
-/* Rich Text Styling */
-.prose {
-  color: #64748b;
-  line-height: 1.8;
+@layer components {
+  /* Rich Text Styling */
+  .prose {
+    color: #64748b;
+    line-height: 1.8;
+  }
+  .prose h1 { @apply text-3xl font-black text-slate-900 mb-6 mt-10; }
+  .prose h2 { @apply text-2xl font-bold text-slate-900 mb-4 mt-8; }
+  .prose h3 { @apply text-xl font-bold text-slate-900 mb-3 mt-6; }
+  .prose p { @apply mb-4; }
+  .prose ul { @apply list-disc ml-6 mb-4; }
+  .prose ol { @apply list-decimal ml-6 mb-4; }
+  .prose img { @apply rounded-[2rem] shadow-xl my-8 max-w-full h-auto; }
+  .prose a { @apply text-primary-600 font-bold hover:underline; }
 }
-.prose h1 { @apply text-3xl font-black text-slate-900 mb-6 mt-10; }
-.prose h2 { @apply text-2xl font-bold text-slate-900 mb-4 mt-8; }
-.prose h3 { @apply text-xl font-bold text-slate-900 mb-3 mt-6; }
-.prose p { @apply mb-4; }
-.prose ul { @apply list-disc ml-6 mb-4; }
-.prose ol { @apply list-decimal ml-6 mb-4; }
-.prose img { @apply rounded-[2rem] shadow-xl my-8 max-w-full h-auto; }
-.prose a { @apply text-primary-600 font-bold hover:underline; }
 
 /* Custom Scrollbar for Premium Feel */
 ::-webkit-scrollbar {
