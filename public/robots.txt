@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smk-it-iqro.web.app/sitemap.xml

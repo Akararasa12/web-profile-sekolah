@@ -53,7 +53,8 @@ const Blog = () => {
                 <Link to={`/berita/${post.id}`} className="block h-64 overflow-hidden relative">
                   <img 
                     src={post.imageUrl} 
-                    alt={post.title} 
+                    alt={post.title || 'Berita Sekolah'} 
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-6 left-6">

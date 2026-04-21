@@ -73,7 +73,7 @@ const Gallery = () => {
                   className="relative group rounded-[2.5rem] overflow-hidden shadow-2xl break-inside-avoid shadow-slate-200/50 cursor-pointer"
                   onClick={() => setSelectedImg(item)}
                 >
-                  <img src={item.imageUrl} alt={item.caption} className="w-full h-auto group-hover:scale-110 transition-transform duration-700 ease-out" />
+                  <img src={item.imageUrl} alt={item.caption || 'Foto Galeri'} loading="lazy" className="w-full h-auto group-hover:scale-110 transition-transform duration-700 ease-out" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-8 text-white">
                     <p className="text-sm font-bold text-primary-400 mb-2">{item.category || 'Galeri'}</p>
                     <h3 className="text-lg font-bold mb-4 leading-tight">{item.caption || 'Tanpa Keterangan'}</h3>

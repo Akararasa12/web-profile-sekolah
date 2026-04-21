@@ -56,7 +56,8 @@ const Teachers = () => {
                 <div className="h-72 overflow-hidden relative">
                   <img 
                     src={teacher.imageUrl} 
-                    alt={teacher.name} 
+                    alt={teacher.name || 'Guru'} 
+                    loading="lazy"
                     onError={(e) => {
                       e.target.src = `https://ui-avatars.com/api/?name=${teacher.name}&background=e2e8f0&color=475569&size=512`;
                     }}
