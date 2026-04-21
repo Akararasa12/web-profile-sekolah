@@ -20,8 +20,22 @@ const PPDB = () => {
     setLoading(true);
 
     try {
+      // Format Phone Number (convert 08 to 628)
+      let formattedPhone = formData.phone.replace(/[^0-9]/g, '');
+      if (formattedPhone.startsWith('0')) {
+        formattedPhone = '62' + formattedPhone.substring(1);
+      }
+
+      // Generate Custom Registration ID: MAJOR-DDMMYYYY-SHORTID
+      const now = new Date();
+      const datePart = `${now.getDate().toString().padStart(2, '0')}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getFullYear()}`;
+      const uniquePart = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const regId = `${formData.selectedMajor}-${datePart}-${uniquePart}`;
+
       await addDoc(collection(db, 'registrations'), {
         ...formData,
+        phone: formattedPhone,
+        registrationId: regId,
         status: 'pending',
         createdAt: serverTimestamp(),
       });
