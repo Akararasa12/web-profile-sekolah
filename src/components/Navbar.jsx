@@ -98,45 +98,35 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-slate-900/20 backdrop-blur-[2px] z-40 md:hidden"
-            />
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white border-b border-slate-100 shadow-xl overflow-hidden relative z-50"
-            >
-              <div className="flex flex-col gap-4 p-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`text-lg font-bold flex items-center justify-between ${location.pathname === link.path ? 'text-primary-600' : 'text-slate-600'}`}
-                  >
-                    {link.name}
-                    {location.pathname === link.path && <div className="w-1.5 h-1.5 bg-primary-600 rounded-full" />}
-                  </Link>
-                ))}
-                {currentUser && (
-                  <Link
-                    to="/admin"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 justify-center px-4 py-4 bg-secondary-600 text-white rounded-2xl font-bold shadow-lg shadow-secondary-600/20 mt-4"
-                  >
-                    <LayoutDashboard className="w-5 h-5" />
-                    Dashboard Admin
-                  </Link>
-                )}
-              </div>
-            </motion.div>
-          </>
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-slate-100 shadow-xl overflow-hidden"
+          >
+            <div className="flex flex-col gap-4 p-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`text-lg font-bold ${location.pathname === link.path ? 'text-primary-600' : 'text-slate-600'}`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              {currentUser && (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 justify-center px-4 py-3 bg-secondary-600 text-white rounded-xl font-bold"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
+                  Ke Dashboard
+                </Link>
+              )}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </nav>
