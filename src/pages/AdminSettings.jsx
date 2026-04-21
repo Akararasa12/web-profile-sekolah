@@ -73,6 +73,42 @@ const AdminSettings = () => {
 
   if (loading) return <div className="py-20 text-center font-medium text-slate-400">Memuat pengaturan...</div>;
 
+  const handleResetOfficial = async () => {
+    if (!window.confirm('Reset semua pengaturan ke data resmi sekolah (sesuai dokumen Profil)?')) return;
+    
+    const officialSettings = {
+      ...settings,
+      schoolName: 'SMK ISLAM TERPADU IQRO LELES',
+      tagline: 'Mandiri & Berakhlakul Karimah',
+      description: 'Mencetak Peserta Didik yang Mandiri, Terampil, Disiplin, Berprestasi, Sehat, dan Berakhlakul Karimah.',
+      address: 'Kp. Cicapar Kaler Rt.04 /Rw.01 Desa Leles Kec Leles Kab Garut (44152)',
+      email: 'smkit.iqro@gmail.com',
+      phone: '085603293062',
+      vision: 'MEWUJUDKAN PESERTA DIDIK YANG MANDIRI, TERAMPIL, DISIPLIN, BERPRESTASI, SEHAT, DAN BERAKHLAKUL KARIMAH',
+      mission: [
+        'Meningkatkan kegiatan produktif sebagai keahlian dasar bagi peserta didik.',
+        'Menyediakan sarana prasarana praktek untuk menunjang kegiatan kegiatan produktif bagi peserta didik.',
+        'Menciptakan suasana sekolah harmonis, dinamis dengan menekankan penerapan tata tertib sebagai pedoman.',
+        'Meningkatkan pembinaan-pembinaan kedisplinan melalui pengetahuan umum kemasyarakatan.',
+        'Meningkatkan kualitas peserta didik baik akademik maupun non akademik melalui KBM dan ekstrakurikuler.',
+        'Menciptakan lingkungan yang indah, asri, nyaman, bersih utuk menuju sekolah dan warga sekolah sehat.',
+        'Meningkatkan pembinaan ekstrakurikuler keolahragaan untuk menunjang Prestasi non akademik.',
+        'Meningkatkan kegiatan dan pembinaan akhlaqul karimah melalui keagamaan yang dikolaborasikan dengan pendidikan umum.',
+        'Memasukan kegiatan pembinaan keagamaan kedalam kegiatan ekstrakurikuler sekolah.'
+      ]
+    };
+
+    setSaving(true);
+    try {
+      await setDoc(doc(db, 'settings', 'general'), officialSettings);
+      setSettings(officialSettings);
+      toast.success('Pengaturan berhasil direset ke data resmi!');
+    } catch (error) {
+      toast.error('Gagal mereset data.');
+    }
+    setSaving(false);
+  };
+
   return (
     <div className="max-w-4xl pb-20">
       <div className="flex justify-between items-center mb-12">
@@ -83,14 +119,24 @@ const AdminSettings = () => {
           </h1>
           <p className="text-slate-500 font-medium">Kelola informasi profil, visi misi, dan kontak sekolah.</p>
         </div>
-        <button 
-          onClick={handleSubmit}
-          disabled={saving}
-          className="flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/30 hover:bg-primary-700 transition-all disabled:opacity-50"
-        >
-          {saving ? <Loader2 className="animate-spin w-5 h-5" /> : <Save className="w-5 h-5" />}
-          Simpan Semua
-        </button>
+        <div className="flex gap-4">
+          <button 
+            type="button"
+            onClick={handleResetOfficial}
+            className="flex items-center gap-2 px-6 py-4 bg-orange-50 text-orange-600 rounded-2xl font-bold border-2 border-orange-100 hover:bg-orange-100 transition-all"
+          >
+            <Bell className="w-5 h-5" />
+            Reset ke Data Resmi
+          </button>
+          <button 
+            onClick={handleSubmit}
+            disabled={saving}
+            className="flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/30 hover:bg-primary-700 transition-all disabled:opacity-50"
+          >
+            {saving ? <Loader2 className="animate-spin w-5 h-5" /> : <Save className="w-5 h-5" />}
+            Simpan Semua
+          </button>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">

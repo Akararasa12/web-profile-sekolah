@@ -5,38 +5,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, GraduationCap, X, MessageCircle, Phone, ArrowRight } from 'lucide-react';
 
 const Teachers = () => {
+  const [teachers, setTeachers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
-  const teacherData = [
-    { id: 1, name: "Alan Muhtar, S.Pd.I.,M.Pd.", position: "Kepala Sekolah", subject: "Manajemen Sekolah", gender: 'male' },
-    { id: 2, name: "Imas Masliah, S.P.", position: "Wakasek Kurikulum", subject: "Produktif ATPH", gender: 'female' },
-    { id: 3, name: "Yani Suryani, S.Pt.", position: "Wakasek Kesiswaan", subject: "Produktif ATPH", gender: 'female' },
-    { id: 4, name: "Riza Elisiana, S.Kom.,M.M", position: "Guru", subject: "INFORMATIKA & CODING", gender: 'female' },
-    { id: 5, name: "M Nuru Iman, S.P", position: "Guru", subject: "Produktif ATPH, Sejarah Indonesia", gender: 'male' },
-    { id: 6, name: "Siti Fatimah, S.Pd.", position: "Guru", subject: "Bahasa Inggris", gender: 'female' },
-    { id: 7, name: "Ayi Permana, S.T.", position: "Guru", subject: "Produktif TKJ", gender: 'male' },
-    { id: 8, name: "Ani Kusumawati, S.Kom", position: "Guru", subject: "Produktif TKJ", gender: 'female' },
-    { id: 9, name: "Nurlaelasari M, S.Kom.", position: "Guru", subject: "Produktif TKJ", gender: 'female' },
-    { id: 10, name: "Kevin Junia Rizqi, S.Tr.T.", position: "Guru", subject: "Produktif TKJ", gender: 'male' },
-    { id: 11, name: "Reni, S.Pd", position: "Guru", subject: "Matematika", gender: 'female' },
-    { id: 12, name: "Muzaki Abdul Syukur, S.Pd", position: "Guru", subject: "PAI", gender: 'male' },
-    { id: 13, name: "Imam Mansyur, S.Pd.", position: "Guru", subject: "Produktif OTKP", gender: 'male' },
-    { id: 14, name: "Emma Amalia, S.Pd., M.T.", position: "Guru", subject: "Pendidikan Kewarganegaraan", gender: 'female' },
-    { id: 15, name: "Hilmi Taftajani, S.Pd", position: "Guru", subject: "Tahfidz", gender: 'male' },
-    { id: 16, name: "Rahma Puri, S.Pd", position: "Guru", subject: "IPAS", gender: 'female' },
-    { id: 17, name: "Hadi Nurkholiq, S.M", position: "Guru", subject: "Produktif OTKP", gender: 'male' },
-    { id: 18, name: "Ema Rahayu F, M.Pd", position: "Guru", subject: "Bahasa Indo & SBK", gender: 'female' }
-  ].map(t => ({
-    ...t,
-    imageUrl: t.gender === 'male' 
-      ? 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4' 
-      : 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aria&backgroundColor=ffdfbf',
-    email: `${t.name.toLowerCase().split(' ')[0]}@smkit-iqro.sch.id`,
-    phone: '0856-XXXX-XXXX'
-  }));
-
-  const [teachers] = useState(teacherData);
-  const [loading] = useState(false);
+  useEffect(() => {
+    const q = query(collection(db, 'teachers'), orderBy('name', 'asc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setTeachers(snapshot.docs.map(doc => ({ 
+        id: doc.id, 
+        ...doc.data() 
+      })));
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="pt-32 pb-24 bg-slate-50">
@@ -74,6 +57,9 @@ const Teachers = () => {
                   <img 
                     src={teacher.imageUrl} 
                     alt={teacher.name} 
+                    onError={(e) => {
+                      e.target.src = `https://ui-avatars.com/api/?name=${teacher.name}&background=e2e8f0&color=475569&size=512`;
+                    }}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">

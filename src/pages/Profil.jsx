@@ -107,7 +107,7 @@ const Profil = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-8 bg-white border border-slate-100 rounded-3xl shadow-lg shadow-slate-200/40"
+                className="p-8 bg-white border border-slate-100 rounded-3xl shadow-lg shadow-slate-200/40 text-center flex flex-col items-center justify-center"
               >
                 <p className="text-xs font-black uppercase tracking-widest text-primary-600 mb-2">{item.label}</p>
                 <p className="text-lg font-bold text-slate-900 leading-tight">{item.value}</p>

@@ -8,10 +8,10 @@ const MainLayout = ({ children }) => {
   const [settings, setSettings] = useState({
     schoolName: 'SMK IT IQRO',
     logoUrl: '',
-    description: 'Mencetak Generasi Unggul dalam Imtak dan Iptek. Berkarakter Islami, Berprestasi, dan Siap Menghadapi Masa Depan.',
-    address: 'Jl. Raya Pendidikan No. 123, Garut, Jawa Barat',
-    email: 'info@smkit-iqro.sch.id',
-    phone: '(0262) 123456'
+    description: 'Mencetak Peserta Didik yang Mandiri, Terampil, Disiplin, Berprestasi, Sehat, dan Berakhlakul Karimah.',
+    address: 'Kp. Cicapar Kaler Rt.04 /Rw.01 Desa Leles Kec Leles Kab Garut (44152)',
+    email: 'smkit.iqro@gmail.com',
+    phone: '085603293062'
   })
 
   useEffect(() => {

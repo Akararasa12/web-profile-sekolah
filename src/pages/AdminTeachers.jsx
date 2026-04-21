@@ -115,6 +115,56 @@ const AdminTeachers = () => {
     setFormData({ name: '', position: '', subject: '', phone: '', email: '', image: null, imageUrl: '' });
   };
 
+  const handleSync = async () => {
+    if (teachers.length > 0) {
+      if (!window.confirm('Sudah ada data guru di database. Tetap sinkronkan data baru dari dokumen?')) return;
+    }
+    
+    setLoading(true);
+    const teacherData = [
+      { name: "Alan Muhtar, S.Pd.I.,M.Pd.", position: "Kepala Sekolah", subject: "Manajemen Sekolah", gender: 'male' },
+      { name: "Imas Masliah, S.P.", position: "Wakasek Kurikulum", subject: "Produktif ATPH", gender: 'female' },
+      { name: "Yani Suryani, S.Pt.", position: "Wakasek Kesiswaan", subject: "Produktif ATPH", gender: 'female' },
+      { name: "Riza Elisiana, S.Kom.,M.M", position: "Guru", subject: "INFORMATIKA & CODING", gender: 'female' },
+      { name: "M Nuru Iman, S.P", position: "Guru", subject: "Produktif ATPH, Sejarah Indonesia", gender: 'male' },
+      { name: "Siti Fatimah, S.Pd.", position: "Guru", subject: "Bahasa Inggris", gender: 'female' },
+      { name: "Ayi Permana, S.T.", position: "Guru", subject: "Produktif TKJ", gender: 'male' },
+      { name: "Ani Kusumawati, S.Kom", position: "Guru", subject: "Produktif TKJ", gender: 'female' },
+      { name: "Nurlaelasari M, S.Kom.", position: "Guru", subject: "Produktif TKJ", gender: 'female' },
+      { name: "Kevin Junia Rizqi, S.Tr.T.", position: "Guru", subject: "Produktif TKJ", gender: 'male' },
+      { name: "Reni, S.Pd", position: "Guru", subject: "Matematika", gender: 'female' },
+      { name: "Muzaki Abdul Syukur, S.Pd", position: "Guru", subject: "PAI", gender: 'male' },
+      { name: "Imam Mansyur, S.Pd.", position: "Guru", subject: "Produktif OTKP", gender: 'male' },
+      { name: "Emma Amalia, S.Pd., M.T.", position: "Guru", subject: "Pendidikan Kewarganegaraan", gender: 'female' },
+      { name: "Hilmi Taftajani, S.Pd", position: "Guru", subject: "Tahfidz", gender: 'male' },
+      { name: "Rahma Puri, S.Pd", position: "Guru", subject: "IPAS", gender: 'female' },
+      { name: "Hadi Nurkholiq, S.M", position: "Guru", subject: "Produktif OTKP", gender: 'male' },
+      { name: "Ema Rahayu F, M.Pd", position: "Guru", subject: "Bahasa Indo & SBK", gender: 'female' }
+    ];
+
+    try {
+      for (const t of teacherData) {
+        const imageUrl = t.gender === 'male' 
+          ? `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}&backgroundColor=e2e8f0&top=shortHair` 
+          : `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}&backgroundColor=e2e8f0&top=longHair`;
+        
+        await addDoc(collection(db, 'teachers'), {
+          name: t.name,
+          position: t.position,
+          subject: t.subject,
+          phone: '0856-XXXX-XXXX',
+          email: `${t.name.toLowerCase().split(' ')[0]}@smkit-iqro.sch.id`,
+          imageUrl: imageUrl,
+          createdAt: new Date()
+        });
+      }
+      toast.success('18 Data guru berhasil disinkronkan ke database!');
+    } catch (error) {
+      toast.error('Gagal sinkronisasi data.');
+    }
+    setLoading(false);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-12">
@@ -122,13 +172,22 @@ const AdminTeachers = () => {
           <h1 className="text-3xl font-black text-slate-900 mb-2">Kelola Dewan Guru</h1>
           <p className="text-slate-500 font-medium">Tambah, edit, atau hapus profil guru SMK IT IQRO.</p>
         </div>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-6 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/30 hover:bg-primary-700 transition-all"
-        >
-          <Plus className="w-5 h-5" />
-          Tambah Guru
-        </button>
+        <div className="flex gap-4">
+          <button 
+            onClick={handleSync}
+            className="flex items-center gap-2 px-6 py-4 bg-emerald-50 text-emerald-600 rounded-2xl font-bold border-2 border-emerald-100 hover:bg-emerald-100 transition-all"
+          >
+            <Loader2 className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+            Sinkronkan Data
+          </button>
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 px-6 py-4 bg-primary-600 text-white rounded-2xl font-bold shadow-lg shadow-primary-600/30 hover:bg-primary-700 transition-all"
+          >
+            <Plus className="w-5 h-5" />
+            Tambah Guru
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -148,7 +207,14 @@ const AdminTeachers = () => {
                 className="bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 group"
               >
                 <div className="h-60 relative overflow-hidden">
-                  <img src={teacher.imageUrl} alt={teacher.name} className="w-full h-full object-cover" />
+                  <img 
+                    src={teacher.imageUrl} 
+                    alt={teacher.name} 
+                    className="w-full h-full object-cover" 
+                    onError={(e) => {
+                      e.target.src = `https://ui-avatars.com/api/?name=${teacher.name}&background=e2e8f0&color=475569&size=512`;
+                    }}
+                  />
                   <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button onClick={() => handleEdit(teacher)} className="p-3 bg-white/90 backdrop-blur shadow-lg rounded-xl text-secondary-600 hover:bg-secondary-600 hover:text-white transition-all">
                       <Edit2 className="w-4 h-4" />
@@ -200,6 +266,9 @@ const AdminTeachers = () => {
                           src={formData.image ? URL.createObjectURL(formData.image) : formData.imageUrl} 
                           className="w-full h-full object-cover" 
                           alt="Preview"
+                          onError={(e) => {
+                            e.target.src = `https://ui-avatars.com/api/?name=${formData.name || 'Guru'}&background=e2e8f0&color=475569&size=512`;
+                          }}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-slate-400">
